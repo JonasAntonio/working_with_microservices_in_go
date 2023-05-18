@@ -1,2 +1,4 @@
 db-data/postgres/*
 !db-data/postgres/.gitkeep
+db-data/mongo/*
+!db-data/mongo/.gitkeep
