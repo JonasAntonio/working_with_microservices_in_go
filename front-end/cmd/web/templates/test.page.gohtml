@@ -44,7 +44,7 @@
     let received = document.getElementById("received")
 
     mailBtn.addEventListener("click", function () {
-        const payload = {
+        post('/handle', {
             action: "mail",
             mail: {
                 from: "me@example.com",
@@ -52,113 +52,51 @@
                 subject: "Test email",
                 message: "Hello World!",
             }
-        }
-
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
-
-        const body = {
-            method: 'POST',
-            body: JSON.stringify(payload),
-            headers: headers,
-        }
-
-        fetch("http:\/\/localhost:8080/handle", body)
-            .then((response) => response.json())
-            .then((data) => {
-                sent.innerHTML = JSON.stringify(payload, undefined, 4)
-                received.innerHTML = JSON.stringify(data, undefined, 4);
-                if (data.error) {
-                    output.innerHTML += `<br><strong>Error:</strong> ${data.message}`
-                    return
-                }
-
-                output.innerHTML += `<br><strong>Response from broker service:</strong> ${data.message}`
-            })
-            .catch(error => {
-                output.innerHTML += `<br><br>Error: ` + error
-            })
+        })
     })
 
     logBtn.addEventListener("click", function () {
-        const payload = {
+        post('/handle', {
             action: "log",
             log: {
                 name: "event",
                 data: "Some kind of data"
             }
-        }
-
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
-
-        const body = {
-            method: "POST",
-            body: JSON.stringify(payload),
-            headers: headers
-        }
-
-        fetch("http:\/\/localhost:8080/handle", body)
-            .then((response) => response.json())
-            .then((data) => {
-                sent.innerHTML = JSON.stringify(payload, undefined, 4)
-                received.innerHTML = JSON.stringify(data, undefined, 4);
-                if (data.error) {
-                    output.innerHTML += `<br><strong>Error:</strong> ${data.message}`
-                    return
-                }
-
-                output.innerHTML += `<br><strong>Response from broker service:</strong> ${data.message}`
-            })
-            .catch(error => {
-                output.innerHTML += `<br><br>Error: ` + error
-            })
+        })
     })
 
     brokerBtn.addEventListener("click", function () {
-        const body = {
-            method: 'POST',
-        }
-
-        fetch("http:\/\/localhost:8080", body)
-            .then((response) => response.json())
-            .then((data) => {
-                sent.innerHTML = "empty post request"
-                received.innerHTML = JSON.stringify(data, undefined, 4);
-                if (data.error) {
-                    console.log(data.message)
-                    return
-                }
-
-                output.innerHTML += `<br><strong>Response from broker service:</strong> ${data.message}`
-            })
-            .catch(error => {
-                output.innerHTML += `<br><br>Error: ` + error
-            })
+        post()
     })
 
     authBrokerBtn.addEventListener("click", function () {
-        const payload = {
+        post('/handle', {
             action: "auth",
             auth: {
                 email: "admin@example.com",
                 password: "verysecret",
             }
+        })
+    })
+
+    function post(endpoint = '/', payload = {}) {
+        let sentValue = "empty post request";
+        let fetchOptions = {method: 'POST'}
+
+        if (Object.keys(payload).length > 0) {
+            const headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+
+            fetchOptions.body = JSON.stringify(payload);
+            fetchOptions.headers = headers;
+
+            sentValue = JSON.stringify(payload, undefined, 4);
         }
 
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
-
-        const body = {
-            method: 'POST',
-            body: JSON.stringify(payload),
-            headers: headers,
-        }
-
-        fetch("http:\/\/localhost:8080/handle", body)
+        fetch(`http://localhost:8080${endpoint}`, fetchOptions)
             .then((response) => response.json())
             .then((data) => {
-                sent.innerHTML = JSON.stringify(payload, undefined, 4)
+                sent.innerHTML = sentValue;
                 received.innerHTML = JSON.stringify(data, undefined, 4);
                 if (data.error) {
                     output.innerHTML += `<br><strong>Error:</strong> ${data.message}`
@@ -170,6 +108,6 @@
             .catch(error => {
                 output.innerHTML += `<br><br>Error: ` + error
             })
-    })
+    }
 </script>
 {{end}}
