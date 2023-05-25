@@ -1,4 +1,44 @@
-# Projeto de Desenvolvimento de Microservices em Go
+# 🇺🇸 Go Microservices Development Project
+
+This is a project developed as part of the course **"Working with Microservices in Go (Golang)"** by instructor **Trevor Sawler** available on Udemy. The objective of this project is to learn how to develop microservices in Go, understanding the concept of microservices, their application, and how they communicate with each other.
+
+## Course Link
+
+[Working with Microservices in Go (Golang) on Udemy](https://www.udemy.com/course/working-with-microservices-in-go/)
+
+## Description
+
+In this course, we explore the fundamentals and practices of developing microservices in Go:
+
+1. Learn about microservices and when to use them as an architecture for distributed systems.
+2. Develop single-purpose microservices with loose coupling that work together as a distributed system.
+3. Explore different methods of communication between microservices, such as REST, RPC, and gRPC.
+4. Use the Advanced Message Queuing Protocol (AMQP) with RabbitMQ to send events between microservices.
+5. Package microservices into Docker containers and use Docker Compose to manage and orchestrate the services in a local environment.
+6. Scale and deploy microservices in a Docker Swarm, leveraging scalability and high availability features.
+7. Automate builds and application execution in Docker using a Makefile.
+
+## Requirements
+
+To run this project, you need:
+
+- Go (version 1.20 or higher) installed on your system.
+- Docker installed on your system.
+- Make (task automation utility) installed on your system.
+- A text editor or IDE configured for Go. Recommended: **Visual Studio Code**.
+
+## Installation
+
+To set up and run the project:
+
+1. Clone this repository.
+2. Make sure you have Go installed correctly on your system.
+3. Make sure Docker is installed and running on your system.
+4. Make sure you have Make installed on your system.
+5. Open the project in your text editor or IDE configured for Go.
+6. Open the `project` folder in a terminal and run the command `make up_build` to bring up the Docker containers and build the Go applications.
+
+# 🇧🇷 Projeto de Desenvolvimento de Microservices em Go
 
 Este é um projeto desenvolvido como parte do curso **"Working with Microservices in Go (Golang)"** do professor **Trevor Sawler** disponível na plataforma Udemy. O objetivo deste projeto é aprender a desenvolver microservices em Go, compreendendo o conceito de microservices, sua aplicação e como eles se comunicam entre si.
 
